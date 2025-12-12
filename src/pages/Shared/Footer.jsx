@@ -101,7 +101,7 @@ const Footer = () => {
         className="py-4 text-center text-sm"
         style={{ backgroundColor: "#002A28" }}
       >
-        © 2025 <span className="text-secondary font-semibold">BookCom</span> All Rights Reserved.
+        © 2025 <span className="text-secondary font-semibold">BookVerse</span> All Rights Reserved.
       </div>
     </footer>
   );
