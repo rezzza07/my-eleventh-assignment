@@ -6,7 +6,7 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/books">Books</NavLink></li>
+        <li><NavLink to="/all-books">All Books</NavLink></li>
         <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     </>
 
@@ -44,8 +44,8 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                {/*BookVerse*/}
-                <Link to="/" className="font-bold text-xl flex items-center text-primary gap-2">BookVerse</Link>
+                {/*BookCourier*/}
+                <Link to="/" className="font-bold text-xl flex items-center text-primary gap-2">BookCourier</Link>
             </div>
 
             {/* CENTER — Desktop Menu */}
