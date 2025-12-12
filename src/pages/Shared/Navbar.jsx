@@ -45,7 +45,7 @@ const Navbar = () => {
                 </div>
 
                 {/*BookVerse*/}
-                <Link to="/" className="font-bold text-xl flex items-center gap-2">BookVerse</Link>
+                <Link to="/" className="font-bold text-xl flex items-center text-primary gap-2">BookVerse</Link>
             </div>
 
             {/* CENTER — Desktop Menu */}
@@ -60,7 +60,7 @@ const Navbar = () => {
 
 
                 {/* Login Btn */}
-                <Link to="/login" className="btn btn-primary rounded-full px-5">
+                <Link to="/login" className="btn btn-primary rounded-full text-secondary px-5">
                     Login
                 </Link>
             </div>
