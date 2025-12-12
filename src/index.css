@@ -8,14 +8,13 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #CAEB66;
-  --color-secondary: #03373D;
+  --color-primary: #003C37;
+  --color-secondary: #D8C8A5;
 }
 
 
 
 body {
   font-family: "Poppins", sans-serif;
-  font-weight: 100;
   font-style: normal;
 }
