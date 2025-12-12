@@ -11,7 +11,7 @@ const Banner = () => {
     const slides = [
         {
             id: 1,
-            title: "Explore The Best Books",
+            title: "The Midnight Library",
             description: "Unlock premium collections selected specially for readers like you.",
             image: bannerImg1
         },
