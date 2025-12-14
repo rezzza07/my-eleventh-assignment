@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
+import Logo from "../../components/Logo/Logo";
 
 
 const Navbar = () => {
@@ -45,7 +46,8 @@ const Navbar = () => {
                 </div>
 
                 {/*BookCourier*/}
-                <Link to="/" className="font-bold text-xl flex items-center text-primary gap-2">BookCourier</Link>
+                <Logo></Logo>
+                
             </div>
 
             {/* CENTER — Desktop Menu */}
