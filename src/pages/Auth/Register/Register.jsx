@@ -2,18 +2,48 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FaUser, FaEnvelope, FaLock, FaImage } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser } = useAuth();
+    const { registerUser, updateUserProfile } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const handleRegistration = (data) => {
+
+        const profileImg = data.photo[0];
         console.log(data);
         registerUser(data.email, data.password)
             .then(result => {
                 console.log(result.user);
+
+                const formData = new FormData();
+                formData.append('image', profileImg);
+
+                const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`
+
+                axios.post(image_API_URL, formData)
+                    .then(res => {
+                        console.log(res.data.data.url)
+                        const userProfile = {
+                            displayName: data.name,
+                            photoURL: res.data.data.url
+                        }
+                        updateUserProfile(userProfile)
+                            .then(() => {
+                                console.log('User profile updated')
+                                navigate(location?.state || '/')
+                            })
+                            .catch(error => console.log(error))
+
+
+                    })
+
+
             })
             .catch(error => {
                 console.log(error)
@@ -45,7 +75,7 @@ const Register = () => {
                         <div className="relative">
                             <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-primary" />
                             <input
-                                type="text"
+                                type="text" {...register('name', { required: true })}
                                 placeholder="Your name"
                                 className="input input-bordered w-full pl-10 focus:border-primary"
                             />
@@ -58,8 +88,8 @@ const Register = () => {
                         <div className="relative">
                             <FaImage className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary" />
                             <input
-                                type="file"
-                                className="file-input file-input-bordered w-full pl-10"
+                                type="file" {...register('photo', { required: true })}
+                                className="file-input file-input-bordered btn-secondary text-primary w-full pl-10"
                             />
                         </div>
                     </div>
@@ -105,7 +135,7 @@ const Register = () => {
                     </div>
 
                     {/* Register Button */}
-                    <button className="btn w-full bg-primary hover:bg-primary/90 text-black font-semibold rounded-xl mt-4">
+                    <button className="btn w-full bg-primary hover:bg-primary/90 text-secondary font-semibold rounded-xl mt-4">
                         Register
                     </button>
                 </form>
@@ -124,6 +154,7 @@ const Register = () => {
                 <p className="text-center text-sm text-gray-600 mt-6">
                     Already have an account?{" "}
                     <Link
+                        state={location.state}
                         to="/login"
                         className="text-secondary font-semibold underline hover:text-secondary/80"
                     >
