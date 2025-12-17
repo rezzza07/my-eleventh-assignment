@@ -10,7 +10,7 @@ const OrderModal = ({ book }) => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
-  const { register, handleSubmit, reset, control } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   /* ------------------ Fetch coverage ------------------ */
   const { data: coverage = [] } = useQuery({
@@ -23,53 +23,47 @@ const OrderModal = ({ book }) => {
 
   /* ------------------ Region / District ------------------ */
   const regions = [...new Set(coverage.map(c => c.region))];
-
-  const senderRegion = useWatch({
-    control,
-    name: 'senderRegion',
-  });
-
+  const senderRegion = useWatch({ name: 'senderRegion', control });
   const receiverRegion = useWatch({ name: 'receiverRegion', control });
 
-  const districtsByRegion = region =>
-    coverage
-      .filter(c => c.region === region)
-      .map(c => c.district);
+  const districtsByRegion = region => coverage.filter(c => c.region === region).map(c => c.district);
 
   /* ------------------ Submit ------------------ */
-  const handleOrder = async data => {
-    const orderInfo = {
-      bookId: book._id,
-      bookName: book.name,
-      price: book.price,
+  const handleOrder = data => {
+    const isRegular = data.courierType === "regular";
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
 
-      userName: user?.displayName,
-      email: user?.email,
+    let deliveryCost = 0;
 
-      parcelType: data.bookType,
-      phone: data.phone,
-      receiverPhone: data.receiverPhone,
-      address: data.address,
-      notes: data.notes,
-      region: data.region,
-      district: data.district,
-
-      orderStatus: "pending",
-      paymentStatus: "unpaid",
-      createdAt: new Date(),
-    };
-
-    try {
-      const res = await axiosSecure.post("/orders", orderInfo);
-      if (res.data.insertedId) {
-        document.getElementById("order_modal").close();
-        Swal.fire("Success", "Order placed successfully!", "success");
-        reset();
-      }
-    } catch {
-      Swal.fire("Error", "Failed to place order", "error");
+    if (isRegular) {
+      deliveryCost = isSameDistrict ? 1 : 1.50;
+    } else {
+      deliveryCost = isSameDistrict ? 2 : 2.75;
     }
-  };
+
+    const bookPrice = (book?.price) || 0;
+    const totalCost = bookPrice + deliveryCost;
+
+    Swal.fire({
+      title: "Confirm Order",
+      html: `
+      <p><b>Book Price:</b> $${bookPrice}</p>
+      <p><b>Delivery Charge:</b> $${deliveryCost}</p>
+      <hr />
+      <p><b>Total:</b> $${totalCost}</p>
+    `,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Place Order",
+
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axiosSecure.post('/courier', data);
+        Swal.fire("Success", "Order placed successfully!", "success");
+      }
+    });
+
+  }
 
   return (
     <dialog id="order_modal" className="modal">
@@ -97,9 +91,9 @@ const OrderModal = ({ book }) => {
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
-                  value="document"
+                  value="regular"
                   defaultChecked
-                  {...register("bookType")}
+                  {...register("courierType")}
                   className="radio text-secondary"
                 />
                 Regular
@@ -108,8 +102,8 @@ const OrderModal = ({ book }) => {
               <label className="flex items-center gap-2">
                 <input
                   type="radio"
-                  value="non-document"
-                  {...register("bookType")}
+                  value="express"
+                  {...register("courierType")}
                   className="radio text-secondary"
                 />
                 Express
@@ -250,21 +244,26 @@ const OrderModal = ({ book }) => {
 
               {/* Notes */}
               <div>
-               <label className="label text-primary text-[12px] font-semibold">Delivery Notes</label>
-              <textarea
-                {...register("notes")}
-                className="textarea textarea-bordered border-primary w-full"
-                placeholder="Delivery notes (optional)"
-              /> 
+                <label className="label text-primary text-[12px] font-semibold">Delivery Notes</label>
+                <textarea
+                  {...register("notes")}
+                  className="textarea textarea-bordered border-primary w-full"
+                  placeholder="Delivery notes (optional)"
+                />
               </div>
-              
+
             </div>
 
           </div>
 
           {/* Actions */}
           <div className="modal-action">
-            <button className="btn btn-primary">Place Order</button>
+            <input
+              type="submit"
+              className='btn btn-primary'
+              value="Place Order"
+              onClick={() => document.getElementById("order_modal").close()}
+            />
             <button
               type="button"
               className="btn"
