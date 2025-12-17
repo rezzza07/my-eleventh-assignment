@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
 
 const OrderModal = ({ book }) => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useAuth
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { register, handleSubmit, control } = useForm();
@@ -122,9 +122,9 @@ const OrderModal = ({ book }) => {
               <div>
                 <label className="label text-primary text-[12px] font-semibold">Enter your Name</label>
                 <input
-                  {...register("userName")}
+                  {...register("senderName")}
                   defaultValue={user?.displayName}
-                  readOnly
+                  placeholder="Sender Name"
                   className="input input-bordered border-primary w-full"
                 />
               </div>
@@ -134,9 +134,9 @@ const OrderModal = ({ book }) => {
               <div>
                 <label className="label text-primary text-[12px] font-semibold">Enter your Email Address</label>
                 <input
-                  {...register("userEmail")}
+                  {...register("senderEmail")}
                   defaultValue={user?.email}
-                  readOnly
+                  placeholder="Sender Email"
                   className="input input-bordered border-primary w-full"
                 />
               </div>

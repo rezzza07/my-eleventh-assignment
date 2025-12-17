@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 import OrderModal from "./OrderModal";
-import { AuthContext } from "../../../context/AuthContext/AuthContext";
+
 
 
 const BookDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext);
+  
 
   const { data: book = {}, isLoading } = useQuery({
     queryKey: ["book", id],

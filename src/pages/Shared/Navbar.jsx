@@ -22,6 +22,12 @@ const Navbar = () => {
         <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     </>
 
+    {
+        user && <>
+        <li><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>
+        </>
+    }
+
 
     return (
         <div className="navbar bg-base-100 shadow-md px-4 sticky top-0 z-50">
