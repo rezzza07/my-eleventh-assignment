@@ -42,7 +42,9 @@ const OrderModal = ({ book }) => {
     }
 
     const bookPrice = (book?.price) || 0;
-    const totalCost = bookPrice + deliveryCost;
+    const cost = bookPrice + deliveryCost;
+
+    data.cost = cost;
 
     Swal.fire({
       title: "Confirm Order",
@@ -50,7 +52,7 @@ const OrderModal = ({ book }) => {
       <p><b>Book Price:</b> $${bookPrice}</p>
       <p><b>Delivery Charge:</b> $${deliveryCost}</p>
       <hr />
-      <p><b>Total:</b> $${totalCost}</p>
+      <p><b>Total:</b> $${cost}</p>
     `,
       icon: "warning",
       showCancelButton: true,

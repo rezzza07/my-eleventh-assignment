@@ -13,6 +13,9 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import BookDetails from "../pages/All Books/BookDetails/BookDetails";
 import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
+import PaymentCancel from "../pages/Dashboard/Payment/PaymentCancel";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +62,18 @@ export const router = createBrowserRouter([
       {
         path:'my-orders',
         Component: MyOrders
+      },
+      {
+        path:'payment/:orderId',
+        Component: Payment
+      },
+      {
+        path:'payment-success',
+        Component: PaymentSuccess
+      },
+      {
+        path:'payment-cancelled',
+        Component:PaymentCancel
       }
     ]
   }
