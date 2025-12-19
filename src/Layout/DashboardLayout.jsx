@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaReceipt } from 'react-icons/fa6';
 import { FiPackage } from 'react-icons/fi';
 import { HiOutlineHome } from 'react-icons/hi';
 import { IoHome } from 'react-icons/io5';
@@ -47,6 +48,16 @@ const DashboardLayout = () => {
                             >
                                 <PiPackageFill className="text-lg" />
                                 <span className="is-drawer-close:hidden">My Orders</span>
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink
+                                to="/dashboard/invoices"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <FaReceipt className="text-lg" />
+                                <span className="is-drawer-close:hidden">Invoices</span>
                             </NavLink>
                         </li>
 

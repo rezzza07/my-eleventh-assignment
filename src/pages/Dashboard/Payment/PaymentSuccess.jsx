@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useSearchParams } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
+  const [paymentInfo, setPaymentInfo] = useState({});
   const sessionId = searchParams.get('session_id');
   const axiosSecure = useAxiosSecure();
   console.log(sessionId);
@@ -14,6 +15,10 @@ const PaymentSuccess = () => {
       axiosSecure.patch(`/payment-success?session_id=${sessionId}`)
         .then(res => {
           console.log(res.data)
+          setPaymentInfo({
+            transactionId: res.data.transactionId,
+            trackingId: res.data.trackingId
+          })
         })
     }
   }, [sessionId, axiosSecure])
@@ -48,6 +53,9 @@ const PaymentSuccess = () => {
             <button className="btn btn-outline btn-secondary">
               Go to Dashboard
             </button>
+
+            <p>Transaction id : {paymentInfo.transactionId}</p>
+            <p>tracking id : {paymentInfo.trackingId}</p>
           </div>
         </div>
       </div>

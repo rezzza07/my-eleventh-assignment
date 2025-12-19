@@ -4,11 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const OrderModal = ({ book }) => {
   // const { user } = useAuth
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { register, handleSubmit, control } = useForm();
 
@@ -49,19 +51,33 @@ const OrderModal = ({ book }) => {
     Swal.fire({
       title: "Confirm Order",
       html: `
-      <p><b>Book Price:</b> $${bookPrice}</p>
-      <p><b>Delivery Charge:</b> $${deliveryCost}</p>
-      <hr />
-      <p><b>Total:</b> $${cost}</p>
-    `,
+    <p><b>Book Price:</b> $${bookPrice}</p>
+    <p><b>Delivery Charge:</b> $${deliveryCost}</p>
+    <hr />
+    <p><b>Total:</b> $${cost}</p>
+  `,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Place Order",
+      cancelButtonText: "Cancel",
 
-    }).then(async (result) => {
+      
+      confirmButtonColor: "#003C37",   
+      cancelButtonColor: "#D8C8A5",    
+    }).then((result) => {
       if (result.isConfirmed) {
-        await axiosSecure.post('/courier', data);
-        Swal.fire("Success", "Order placed successfully!", "success");
+        axiosSecure.post('/courier', data)
+          .then(res => {
+            if (res.data.insertedId) {
+              navigate('/dashboard/my-orders')
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Order placed successfully! Please Pay!!",
+                confirmButtonColor: "#003C37",
+              });
+            }
+          });
       }
     });
 
