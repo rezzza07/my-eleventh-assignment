@@ -6,7 +6,7 @@ import { FiEdit } from 'react-icons/fi';
 import { FaTrashCan } from 'react-icons/fa6';
 import { GiCancel } from 'react-icons/gi';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router';
+
 
 const MyOrders = () => {
 
@@ -50,6 +50,18 @@ const MyOrders = () => {
     });
   }
 
+  const handlePayment =async (order) => {
+    const paymentInfo = {
+      cost: order.cost,
+      orderId: order._id,
+      senderEmail: order.senderEmail,
+      bookName: order.bookName
+    }
+    const res = await axiosSecure.post('/create-checkout-session',paymentInfo);
+    window.location.assign(res.data.url);
+    
+  }
+
   return (
     <div className="overflow-x-auto rounded-xl shadow-lg border border-base-300">
       <table className="table w-full">
@@ -83,9 +95,9 @@ const MyOrders = () => {
                   {
                     order.paymentStatus === 'paid' ?
                       <span className='text-green-400'>Paid</span> :
-                      <Link to={`/dashboard/payment/${order._id}`}>
-                        <button className="btn bg-red-500 text-white">Pay Now</button>
-                      </Link>
+
+                      <button onClick={() => handlePayment(order)} className="btn bg-red-500 text-white">Pay Now</button>
+
                   }
                 </td>
                 <td>Random</td>
