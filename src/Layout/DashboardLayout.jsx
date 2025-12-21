@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaUserCircle } from 'react-icons/fa';
 import { FaReceipt } from 'react-icons/fa6';
 import { FiPackage } from 'react-icons/fi';
 import { HiOutlineHome } from 'react-icons/hi';
@@ -59,6 +60,15 @@ const DashboardLayout = () => {
                             >
                                 <FaReceipt className="text-lg" />
                                 <span className="is-drawer-close:hidden">Invoices</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/dashboard/manage-users"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <FaUserCircle className="text-lg" />
+                                <span className="is-drawer-close:hidden">Manage Users</span>
                             </NavLink>
                         </li>
 
