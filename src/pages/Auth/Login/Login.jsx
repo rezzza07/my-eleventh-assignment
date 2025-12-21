@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";

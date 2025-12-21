@@ -61,6 +61,16 @@ const DashboardLayout = () => {
                             </NavLink>
                         </li>
 
+                        <li>
+                            <NavLink
+                                to="/dashboard/invoices"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <FaReceipt className="text-lg" />
+                                <span className="is-drawer-close:hidden">Approve Librarians</span>
+                            </NavLink>
+                        </li>
+
 
                         {/* List item */}
                         <li>

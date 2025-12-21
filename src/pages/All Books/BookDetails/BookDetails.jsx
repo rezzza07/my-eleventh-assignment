@@ -10,7 +10,7 @@ import OrderModal from "./OrderModal";
 const BookDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  
+
 
   const { data: book = {}, isLoading } = useQuery({
     queryKey: ["book", id],
@@ -26,19 +26,27 @@ const BookDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-10">
-      <div className="card lg:card-side bg-base-100 shadow-xl">
-        <figure className="lg:w-1/2">
-          <img src={book.image} alt={book.name} />
+      {/* Card Container */}
+      <div className="card lg:card-side bg-base-100 shadow-2xl rounded-3xl overflow-hidden border-2 border-primary">
+
+        {/* Book Image */}
+        <figure className="lg:w-1/2 h-96 overflow-hidden">
+          <img
+            src={book.image}
+            alt={book.name}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+          />
         </figure>
 
-        <div className="card-body">
-          <h2 className="card-title text-3xl">{book.name}</h2>
-          <p><strong>Author:</strong> {book.author}</p>
-          <p>{book.description}</p>
-          <p className="font-bold text-xl">${book.price}</p>
+        {/* Book Details */}
+        <div className="card-body lg:w-1/2 p-8">
+          <h2 className="card-title text-4xl font-extrabold text-primary mb-3">{book.name}</h2>
+          <p className="text-secondary mb-2"><strong>Author:</strong> {book.author}</p>
+          <p className="mb-4 text-base-content/80">{book.description}</p>
+          <p className="text-2xl font-bold text-secondary mb-6">${book.price}</p>
 
           <button
-            className="btn btn-primary mt-4"
+            className="btn btn-primary text-white px-6 py-3 rounded-xl hover:scale-105 transition-transform"
             onClick={() => document.getElementById("order_modal").showModal()}
           >
             Order Now
@@ -46,7 +54,7 @@ const BookDetails = () => {
         </div>
       </div>
 
-      {/* Imported modal */}
+      {/* Order Modal */}
       <OrderModal book={book} />
     </div>
   );

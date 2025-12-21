@@ -17,6 +17,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/Payment/PaymentCancel";
 import Invoices from "../pages/Dashboard/Invoices/Invoices";
+import Librarian from "../pages/Librarian/Librarian";
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,14 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
           <BookDetails></BookDetails>
         </PrivateRoute>
+      },
+      {
+        path: 'librarian',
+        element: <PrivateRoute>
+          <Librarian></Librarian>
+        </PrivateRoute>
       }
+
 
     ]
   },
@@ -61,24 +69,24 @@ export const router = createBrowserRouter([
     </PrivateRoute>,
     children: [
       {
-        path:'my-orders',
+        path: 'my-orders',
         Component: MyOrders
       },
       {
-        path:'payment/:orderId',
+        path: 'payment/:orderId',
         Component: Payment
       },
       {
-        path:'invoices',
-        Component:Invoices
+        path: 'invoices',
+        Component: Invoices
       },
       {
-        path:'payment-success',
+        path: 'payment-success',
         Component: PaymentSuccess
       },
       {
-        path:'payment-cancelled',
-        Component:PaymentCancel
+        path: 'payment-cancelled',
+        Component: PaymentCancel
       }
     ]
   }

@@ -17,22 +17,38 @@ const AllBooks = () => {
 
     return (
 
-        <div className="p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {books.map(book => (
-                <Link to={`/books/${book._id}`} key={book._id}>
-                    <div className="card bg-primary text-primary-content shadow-xl hover:scale-105 duration-300">
-                        <figure>
-                            <img src={book.image} alt={book.name} className="h-60 w-full object-cover" />
-                        </figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{book.name}</h2>
-                            <p className="text-secondary">Author: {book.author}</p>
-                            <p>Status: <span className="badge badge-secondary">{book.status}</span></p>
-                            <p className="font-bold">Price: ${book.price}</p>
+        <div className="min-h-screen bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 p-10">
+
+            {/* Title */}
+            <h1 className="text-5xl font-extrabold text-center mb-12
+          bg-clip-text text-transparent
+          bg-gradient-to-r from-primary to-secondary
+          drop-shadow-lg">
+                All Books Collection
+            </h1>
+
+            {/* Grid of books */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {books.map(book => (
+                    <Link to={`/books/${book._id}`} key={book._id} className="transform hover:scale-105 transition-transform duration-300">
+                        <div className="card bg-primary shadow-2xl rounded-3xl border-2 border-secondary overflow-hidden">
+                            <figure className="h-64 overflow-hidden rounded-t-3xl">
+                                <img
+                                    src={book.image}
+                                    alt={book.name}
+                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                            </figure>
+                            <div className="card-body p-6">
+                                <h2 className="card-title text-secondary font-bold text-xl">{book.name}</h2>
+                                <p className="text-secondary mb-2">Author: <span className="font-semibold">{book.author}</span></p>
+                                <p className='text-white'>Status: <span className="badge badge-outline badge-secondary">{book.status}</span></p>
+                                <p className="mt-3 font-extrabold text-secondary text-lg">Price: ${book.price}</p>
+                            </div>
                         </div>
-                    </div>
-                </Link>
-            ))}
+                    </Link>
+                ))}
+            </div>
         </div>
     );
 };
