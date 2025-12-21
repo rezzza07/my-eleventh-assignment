@@ -7,8 +7,10 @@ import { IoHome } from 'react-icons/io5';
 import { MdOutlineLocalLibrary } from 'react-icons/md';
 import { PiPackageFill } from 'react-icons/pi';
 import { Link, NavLink, Outlet } from 'react-router';
+import useRole from '../hooks/useRole';
 
 const DashboardLayout = () => {
+    const { role } = useRole();
     return (
         <div className="drawer lg:drawer-open  max-w-7xl mx-auto">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -62,25 +64,30 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">Invoices</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/manage-users"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
-                                <FaUserCircle className="text-lg" />
-                                <span className="is-drawer-close:hidden">Manage Users</span>
-                            </NavLink>
-                        </li>
+                        {
+                            role === 'admin' && <>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/manage-users"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <FaUserCircle className="text-lg" />
+                                        <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </NavLink>
+                                </li>
 
-                        <li>
-                            <NavLink
-                                to="/dashboard/approve-librarians"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
-                                <MdOutlineLocalLibrary className="text-lg" />
-                                <span className="is-drawer-close:hidden">Approve Librarians</span>
-                            </NavLink>
-                        </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/approve-librarians"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <MdOutlineLocalLibrary className="text-lg" />
+                                        <span className="is-drawer-close:hidden">Approve Librarians</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+
 
 
                         {/* List item */}

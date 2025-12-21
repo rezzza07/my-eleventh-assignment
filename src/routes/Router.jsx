@@ -20,6 +20,7 @@ import Invoices from "../pages/Dashboard/Invoices/Invoices";
 import Librarian from "../pages/Librarian/Librarian";
 import ApproveLibrarians from "../pages/Dashboard/Approve Librarians/ApproveLibrarians";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -91,12 +92,16 @@ export const router = createBrowserRouter([
         Component: PaymentCancel
       },
       {
-        path:'approve-librarians',
-        Component:ApproveLibrarians
+        path: 'approve-librarians',
+        element: <AdminRoute>
+          <ApproveLibrarians></ApproveLibrarians>
+        </AdminRoute>
       },
       {
-        path:'manage-users',
-        Component:ManageUsers
+        path: 'manage-users',
+        element: <AdminRoute>
+          <ManageUsers></ManageUsers>
+        </AdminRoute>
       }
     ]
   }
