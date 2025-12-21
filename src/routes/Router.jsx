@@ -18,6 +18,7 @@ import PaymentSuccess from "../pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancel from "../pages/Dashboard/Payment/PaymentCancel";
 import Invoices from "../pages/Dashboard/Invoices/Invoices";
 import Librarian from "../pages/Librarian/Librarian";
+import ApproveLibrarians from "../pages/Dashboard/Approve Librarians/ApproveLibrarians";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: 'payment-cancelled',
         Component: PaymentCancel
+      },
+      {
+        path:'approve-librarians',
+        Component:ApproveLibrarians
       }
     ]
   }

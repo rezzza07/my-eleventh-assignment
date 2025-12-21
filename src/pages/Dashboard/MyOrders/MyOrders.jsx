@@ -154,9 +154,7 @@ const MyOrders = () => {
                       <button className="btn btn-square btn-outline btn-primary" title="Edit Order">
                         <FiEdit />
                       </button>
-                      <button className="btn btn-square btn-outline btn-error" title="Delete Order" onClick={() => handleOrderCancel(order._id)}>
-                        <FaTrashCan />
-                      </button>
+                      
                       <button className="btn btn-square btn-outline btn-warning" title="Cancel Order" onClick={() => handleOrderCancel(order._id)}>
                         <GiCancel />
                       </button>

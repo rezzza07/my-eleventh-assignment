@@ -21,7 +21,7 @@ const Librarian = () => {
     });
 
     const regions = [...new Set(coverage.map(c => c.region))];
-    const senderRegion = useWatch({ name: 'senderRegion', control });
+    const Region = useWatch({ name: 'Region', control });
     const districtsByRegion = region => coverage.filter(c => c.region === region).map(c => c.district);
 
     const handleLibrarianApplication = async (data) => {
@@ -72,7 +72,7 @@ return (
                             <div>
                                 <label className="label text-xs font-bold text-gray-400 uppercase">Full Name</label>
                                 <input
-                                    {...register("senderName")}
+                                    {...register("name")}
                                     defaultValue={user?.displayName}
                                     className="input input-ghost w-full border-b-2 border-base-300 focus:border-primary rounded-none px-0 bg-transparent transition-all focus:outline-none"
                                 />
@@ -83,7 +83,7 @@ return (
                                 <div className="relative flex items-center">
                                     <FaEnvelope className="absolute left-0 text-primary/40" />
                                     <input
-                                        {...register("senderEmail")}
+                                        {...register("email")}
                                         defaultValue={user?.email}
                                         className="input input-ghost w-full border-b-2 border-base-300 focus:border-primary rounded-none pl-7 bg-transparent transition-all focus:outline-none"
                                     />
@@ -131,7 +131,7 @@ return (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <fieldset className="form-control w-full">
                                 <label className="label text-xs font-bold text-gray-500">Proposed Region</label>
-                                <select {...register('senderRegion')} defaultValue="" className="select select-bordered border-primary/20 rounded-xl focus:ring-2 focus:ring-primary/20 focus:outline-none bg-white/50">
+                                <select {...register('Region')} defaultValue="" className="select select-bordered border-primary/20 rounded-xl focus:ring-2 focus:ring-primary/20 focus:outline-none bg-white/50">
                                     <option value="" disabled>Select a Region</option>
                                     {regions.map((r, i) => <option key={i} value={r}>{r}</option>)}
                                 </select>
@@ -139,9 +139,9 @@ return (
 
                             <fieldset className="form-control w-full">
                                 <label className="label text-xs font-bold text-gray-500">Proposed District</label>
-                                <select {...register('senderDistrict')} defaultValue="" className="select select-bordered border-secondary/20 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:outline-none bg-white/50">
+                                <select {...register('District')} defaultValue="" className="select select-bordered border-secondary/20 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:outline-none bg-white/50">
                                     <option value="" disabled>Select a District</option>
-                                    {senderRegion && districtsByRegion(senderRegion).map((r, i) => <option key={i} value={r}>{r}</option>)}
+                                    {Region && districtsByRegion(Region).map((r, i) => <option key={i} value={r}>{r}</option>)}
                                 </select>
                             </fieldset>
                         </div>

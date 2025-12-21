@@ -3,6 +3,7 @@ import { FaReceipt } from 'react-icons/fa6';
 import { FiPackage } from 'react-icons/fi';
 import { HiOutlineHome } from 'react-icons/hi';
 import { IoHome } from 'react-icons/io5';
+import { MdOutlineLocalLibrary } from 'react-icons/md';
 import { PiPackageFill } from 'react-icons/pi';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -63,10 +64,10 @@ const DashboardLayout = () => {
 
                         <li>
                             <NavLink
-                                to="/dashboard/invoices"
+                                to="/dashboard/approve-librarians"
                                 className="flex items-center gap-2 text-secondary hover:text-white"
                             >
-                                <FaReceipt className="text-lg" />
+                                <MdOutlineLocalLibrary className="text-lg" />
                                 <span className="is-drawer-close:hidden">Approve Librarians</span>
                             </NavLink>
                         </li>
