@@ -25,6 +25,7 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import AddBook from "../pages/Dashboard/AddBook/AddBook";
 import MyBooks from "../pages/Dashboard/MyBooks/MyBooks";
 import Orders from "../pages/Dashboard/Orders/Orders";
+import EditBook from "../pages/Dashboard/MyBooks/EditBook";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: 'orders',
         Component: Orders
+      },
+      {
+        path: 'edit-book/:id',
+        Component: EditBook
       },
       {
         path: 'approve-librarians',
