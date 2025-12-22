@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBook, FaCalendarAlt, FaDollarSign, FaReceipt, FaUserCircle, FaUserShield, FaUserSlash } from 'react-icons/fa';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { MdLocalLibrary } from 'react-icons/md';
@@ -8,17 +8,18 @@ import Swal from 'sweetalert2';
 const ManageUsers = () => {
 
     const axiosSecure = useAxiosSecure();
+    const [searchText, setSearchText] = useState('')
     const { refetch, data: users = [] } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['users', searchText],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users`);
+            const res = await axiosSecure.get(`/users?searchText=${searchText}`);
             return res.data;
         }
     })
 
-    const handleMakeUser = user => {
+    const handleMakeAdmin = user => {
         const roleInfo = { role: 'admin' }
-        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
             .then(res => {
                 if (res.data.modifiedCount) {
                     refetch()
@@ -32,19 +33,20 @@ const ManageUsers = () => {
     }
 
     const handleRemoveAdmin = user => {
-        const roleInfo = { role: 'user' }
-        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        const roleInfo = { role: 'user' };
+
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
             .then(res => {
-                if (res.data.modifiedCount) {
-                    refetch()
+                if (res.data.modifiedCount > 0) {
+                    refetch();
                     Swal.fire({
-                        title: `${user.displayName} removed Admin`,
-                        icon: "error",
+                        title: `${user.displayName} removed from Admin`,
+                        icon: "success",
                         confirmButtonColor: "#3085d6"
                     });
                 }
-            })
-    }
+            });
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 p-6">
@@ -60,6 +62,31 @@ const ManageUsers = () => {
                         <span className="w-24 h-1 bg-secondary rounded-full mt-2"></span>
                     </div>
                 </div>
+
+                {/* Search */}
+                <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="flex justify-center mb-6"
+                >
+
+                    <div className="flex items-center w-full max-w-sm bg-base-100 rounded-full border border-primary px-3 py-1 shadow-sm gap-2">
+                        <input
+                            onChange={(e) => setSearchText(e.target.value)}
+                            type="search"
+                            name="location"
+                            placeholder="Search user"
+                            className="input input-ghost w-full h-8 px-1 text-xs focus:outline-none"
+                        />
+
+                        <button
+                            type="submit"
+                            className="btn btn-xs rounded-full bg-primary text-secondary border-none hover:bg-primary-focus"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </form>
+
 
                 {/* Table Card */}
                 <div className="bg-base-100 shadow-2xl rounded-3xl overflow-hidden">
@@ -160,7 +187,7 @@ const ManageUsers = () => {
                                             ) : (
                                                 <>
                                                     <button
-                                                        onClick={() => handleMakeUser(user)}
+                                                        onClick={() => handleMakeAdmin(user)}
                                                         title="Make Admin"
                                                         className="btn btn-square btn-outline btn-primary"
                                                     >

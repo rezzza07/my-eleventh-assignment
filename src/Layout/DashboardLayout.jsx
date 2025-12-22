@@ -1,13 +1,13 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaReceipt } from 'react-icons/fa6';
-import { FiPackage } from 'react-icons/fi';
-import { HiOutlineHome } from 'react-icons/hi';
-import { IoHome } from 'react-icons/io5';
-import { MdOutlineLocalLibrary } from 'react-icons/md';
+import { IoBookSharp, IoHome } from 'react-icons/io5';
+import { MdOutlineLocalLibrary, MdOutlinePersonOutline } from 'react-icons/md';
 import { PiPackageFill } from 'react-icons/pi';
 import { Link, NavLink, Outlet } from 'react-router';
 import useRole from '../hooks/useRole';
+import { RiBookShelfFill } from 'react-icons/ri';
+import { TbPackageExport } from 'react-icons/tb';
 
 const DashboardLayout = () => {
     const { role } = useRole();
@@ -64,6 +64,33 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">Invoices</span>
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink
+                                to="/dashboard/add-book"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <RiBookShelfFill className="text-lg" />
+                                <span className="is-drawer-close:hidden">Add Book</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/dashboard/my-books"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <IoBookSharp className="text-lg" />
+                                <span className="is-drawer-close:hidden">My Books</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/dashboard/orders"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <TbPackageExport className="text-lg" />
+                                <span className="is-drawer-close:hidden">Orders</span>
+                            </NavLink>
+                        </li>
                         {
                             role === 'admin' && <>
                                 <li>
@@ -91,6 +118,16 @@ const DashboardLayout = () => {
 
 
                         {/* List item */}
+                        <li>
+                            <NavLink
+                                to="/dashboard/my-profile"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <MdOutlinePersonOutline className="text-lg" />
+                                <span className="is-drawer-close:hidden">My Profile</span>
+                            </NavLink>
+                        </li>
+
                         <li>
                             <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white" data-tip="Settings">
                                 {/* Settings icon */}

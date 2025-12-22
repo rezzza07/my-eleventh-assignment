@@ -3,97 +3,117 @@ import { Link, NavLink } from "react-router";
 import Logo from "../../components/Logo/Logo";
 import useAuth from "../../hooks/useAuth";
 
-
 const Navbar = () => {
+  const { user, logOut } = useAuth();
 
-    const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut().catch(console.error);
+  };
 
-    const handleLogOut = () => {
-        logOut()
-            .then()
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-    const links = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/all-books">All Books</NavLink></li>
-        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-        <li><NavLink to="/librarian">Be A Librarian</NavLink></li>
+  const links = (
+    <>
+      <li><NavLink to="/">Home</NavLink></li>
+      <li><NavLink to="/all-books">All Books</NavLink></li>
+      <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+      <li><NavLink to="/librarian">Be A Librarian</NavLink></li>
+      {user && <li><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>}
     </>
+  );
 
-    {
-        user && <>
-            <li><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>
-        </>
-    }
+  return (
+    <div className="navbar bg-base-100 shadow-md px-4 sticky top-0 z-50">
 
+      {/* LEFT */}
+      <div className="navbar-start">
+        {/* Mobile Menu */}
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round"
+                strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
 
-    return (
-        <div className="navbar bg-base-100 shadow-md px-4 sticky top-0 z-50">
-
-            {/* LEFT — Logo + Website Name */}
-            <div className="navbar-start">
-                {/* Mobile Hamburger */}
-                <div className="dropdown">
-                    <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h16M4 18h16"
-                            />
-                        </svg>
-                    </label>
-
-                    {/* Mobile Dropdown Menu */}
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-                    >
-                        {links}
-                    </ul>
-                </div>
-
-                {/*BookCourier*/}
-                <Logo></Logo>
-
-            </div>
-
-            {/* CENTER — Desktop Menu */}
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 text-md gap-2">
-                    {links}
-                </ul>
-            </div>
-
-            {/* RIGHT — Theme Toggle + Login */}
-            <div className="navbar-end flex items-center gap-3">
-
-
-                {/* Login Btn */}
-                {
-                    user ?
-                        <a
-                            onClick={handleLogOut}
-                            className="btn btn-primary rounded-full text-secondary px-5">
-                            SignOut
-                        </a> : <Link to="/login" className="btn btn-primary rounded-full text-secondary px-5">
-                            Login
-                        </Link>
-                }
-
-            </div>
+          <ul tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+            {links}
+          </ul>
         </div>
-    );
+
+        <Logo />
+      </div>
+
+      {/* CENTER */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 gap-2">
+          {links}
+        </ul>
+      </div>
+
+      {/* RIGHT */}
+      <div className="navbar-end">
+
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="flex items-center gap-2 cursor-pointer">
+
+              {/* Avatar */}
+              <div className="avatar">
+                <div className="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/4pDNDk1/avatar.png"}
+                    alt="profile"
+                  />
+                </div>
+              </div>
+
+              {/* Name */}
+              <span className="hidden md:block font-medium">
+                {user.displayName || "User"}
+              </span>
+
+              {/* Arrow */}
+              <svg className="w-4 h-4 opacity-70" fill="none"
+                stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7" />
+              </svg>
+            </label>
+
+            {/* Dropdown */}
+            <ul tabIndex={0}
+              className="mt-3 p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-56">
+              <li>
+                <p className="font-semibold">{user.displayName}</p>
+                <p className="text-xs opacity-70">{user.email}</p>
+              </li>
+
+              <div className="divider my-1"></div>
+
+              <li>
+                <NavLink to="/dashboard/my-profile">My Profile</NavLink>
+              </li>
+
+              <li>
+                <button onClick={handleLogOut} className="text-error">
+                  Sign Out
+                </button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="btn btn-primary rounded-full text-secondary px-5"
+          >
+            Login
+          </Link>
+        )}
+
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;
