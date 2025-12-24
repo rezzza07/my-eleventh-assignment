@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
-import { useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const PaymentSuccess = () => {
@@ -8,7 +8,8 @@ const PaymentSuccess = () => {
   const [paymentInfo, setPaymentInfo] = useState({});
   const sessionId = searchParams.get('session_id');
   const axiosSecure = useAxiosSecure();
-  console.log(sessionId);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (sessionId) {
@@ -47,12 +48,20 @@ const PaymentSuccess = () => {
           <div className="divider" />
 
           <div className="flex flex-col gap-3">
-            <button className="btn btn-primary">
+           <div className="flex flex-col gap-3 mt-4">
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate('/dashboard/my-orders')}
+            >
               View Order
             </button>
-            <button className="btn btn-outline btn-secondary">
+            <button
+              className="btn btn-outline btn-secondary"
+              onClick={() => navigate('/dashboard')}
+            >
               Go to Dashboard
             </button>
+          </div>
 
             <p>Transaction id : {paymentInfo.transactionId}</p>
             <p>tracking id : {paymentInfo.trackingId}</p>

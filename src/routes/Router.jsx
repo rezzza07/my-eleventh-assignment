@@ -22,10 +22,14 @@ import ApproveLibrarians from "../pages/Dashboard/Approve Librarians/ApproveLibr
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+
+
+import EditBook from "../pages/Dashboard/MyBooks/EditBook";
+import LibrarianBookOrders from "../pages/Dashboard/LibrarianBookOrders/LibrarianBookOrders";
+import LibrarianRoutes from "./LibrarianRoutes";
 import AddBook from "../pages/Dashboard/AddBook/AddBook";
 import MyBooks from "../pages/Dashboard/MyBooks/MyBooks";
-import Orders from "../pages/Dashboard/Orders/Orders";
-import EditBook from "../pages/Dashboard/MyBooks/EditBook";
+import MyWishlist from "../pages/Dashboard/MyWishlist/MyWishlist";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +93,10 @@ export const router = createBrowserRouter([
         Component: Invoices
       },
       {
+        path: 'my-wishlist',
+        Component: MyWishlist
+      },
+      {
         path: 'payment-success',
         Component: PaymentSuccess
       },
@@ -102,15 +110,21 @@ export const router = createBrowserRouter([
       },
       {
         path: 'add-book',
-        Component: AddBook
+        element: <LibrarianRoutes>
+          <AddBook></AddBook>
+        </LibrarianRoutes>
       },
       {
         path: 'my-books',
-        Component: MyBooks
+        element: <LibrarianRoutes>
+          <MyBooks></MyBooks>
+        </LibrarianRoutes>
       },
       {
         path: 'orders',
-        Component: Orders
+        element:<LibrarianRoutes>
+          <LibrarianBookOrders></LibrarianBookOrders>
+        </LibrarianRoutes>
       },
       {
         path: 'edit-book/:id',

@@ -1,5 +1,6 @@
-import React from 'react';
-import { FaBookOpen, FaShippingFast, FaSmile, FaTags } from 'react-icons/fa';
+import React, { useEffect, useRef } from "react";
+import { FaBookOpen, FaShippingFast, FaSmile, FaTags } from "react-icons/fa";
+import { DotLottie } from "@lottiefiles/dotlottie-web";
 
 const WhyChooseBookCourier = () => {
   const features = [
@@ -29,6 +30,33 @@ const WhyChooseBookCourier = () => {
     },
   ];
 
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    const size = 320; 
+    const dpr = window.devicePixelRatio || 1;
+
+    canvasRef.current.width = size * dpr;
+    canvasRef.current.height = size * dpr;
+    canvasRef.current.style.width = `${size}px`;
+    canvasRef.current.style.height = `${size}px`;
+
+
+    const animation = new DotLottie({
+      autoplay: true,
+      loop: true,
+      canvas: canvasRef.current,
+      src: "/book.json", 
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid meet",
+      },
+    });
+
+    return () => animation.destroy();
+  }, []);
+
   return (
     <section className="max-w-6xl mx-auto my-20 px-6 md:px-10">
       {/* Header */}
@@ -53,14 +81,10 @@ const WhyChooseBookCourier = () => {
           ))}
         </div>
 
-        {/* Image */}
+        {/* Animation */}
         <div className="flex justify-center">
           <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl border-8 border-primary transform hover:scale-105 transition duration-300">
-            <img
-              src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200"
-              alt="Books and reading setup"
-              className="w-full h-full object-cover"
-            />
+            <canvas ref={canvasRef} />
           </div>
         </div>
       </div>

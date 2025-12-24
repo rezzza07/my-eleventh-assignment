@@ -4,10 +4,12 @@ import Coverage from '../Coverage';
 import WhyChooseBookCourier from '../WhyChooseBookCourier';
 import LatestBooks from './LatestBooks';
 
+
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            
             <LatestBooks></LatestBooks>
             <Coverage></Coverage>
             <WhyChooseBookCourier></WhyChooseBookCourier>

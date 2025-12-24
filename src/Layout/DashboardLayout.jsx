@@ -57,6 +57,16 @@ const DashboardLayout = () => {
 
                         <li>
                             <NavLink
+                                to="/dashboard/my-wishlist"
+                                className="flex items-center gap-2 text-secondary hover:text-white"
+                            >
+                                <PiPackageFill className="text-lg" />
+                                <span className="is-drawer-close:hidden">My Wishlist</span>
+                            </NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink
                                 to="/dashboard/invoices"
                                 className="flex items-center gap-2 text-secondary hover:text-white"
                             >
@@ -64,33 +74,41 @@ const DashboardLayout = () => {
                                 <span className="is-drawer-close:hidden">Invoices</span>
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/add-book"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
-                                <RiBookShelfFill className="text-lg" />
-                                <span className="is-drawer-close:hidden">Add Book</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/my-books"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
-                                <IoBookSharp className="text-lg" />
-                                <span className="is-drawer-close:hidden">My Books</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/dashboard/orders"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
-                                <TbPackageExport className="text-lg" />
-                                <span className="is-drawer-close:hidden">Orders</span>
-                            </NavLink>
-                        </li>
+                        {/*_______________________________Librarian Route_________________________________ */}
+                        {
+                            role === 'librarian' && <>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/add-book"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <RiBookShelfFill className="text-lg" />
+                                        <span className="is-drawer-close:hidden">Add Book</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/my-books"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <IoBookSharp className="text-lg" />
+                                        <span className="is-drawer-close:hidden">My Books</span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/orders"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <TbPackageExport className="text-lg" />
+                                        <span className="is-drawer-close:hidden">Orders</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+                        {/* _____________________________-------- x ----------__________________________ */}
+
+                        {/*_______________________________Admin Route_________________________________ */}
                         {
                             role === 'admin' && <>
                                 <li>
@@ -114,7 +132,7 @@ const DashboardLayout = () => {
                                 </li>
                             </>
                         }
-
+                        {/* _____________________________-------- x ----------__________________________ */}
 
 
                         {/* List item */}

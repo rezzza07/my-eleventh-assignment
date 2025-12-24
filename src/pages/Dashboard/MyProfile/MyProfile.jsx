@@ -48,13 +48,7 @@ const MyProfile = () => {
                 text: "Your profile has been updated successfully",
                 confirmButtonColor: "#570df8",
             });
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Update Failed",
-                text: error.message,
-            });
-        } finally {
+        }  finally {
             setLoading(false);
         }
     };
