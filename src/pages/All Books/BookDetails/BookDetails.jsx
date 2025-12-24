@@ -78,7 +78,6 @@ const BookDetails = () => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-            {/* Order Now Button */}
             <button
               className="btn btn-primary text-white px-6 py-3 rounded-xl hover:scale-105 transition-transform"
               onClick={() => document.getElementById("order_modal").showModal()}

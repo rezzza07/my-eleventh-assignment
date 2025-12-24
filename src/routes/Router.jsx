@@ -30,6 +30,7 @@ import LibrarianRoutes from "./LibrarianRoutes";
 import AddBook from "../pages/Dashboard/AddBook/AddBook";
 import MyBooks from "../pages/Dashboard/MyBooks/MyBooks";
 import MyWishlist from "../pages/Dashboard/MyWishlist/MyWishlist";
+import ManageBooks from "../pages/Dashboard/Manage Books/ManageBooks";
 
 export const router = createBrowserRouter([
   {
@@ -134,6 +135,12 @@ export const router = createBrowserRouter([
         path: 'approve-librarians',
         element: <AdminRoute>
           <ApproveLibrarians></ApproveLibrarians>
+        </AdminRoute>
+      },
+      {
+        path: 'manage-books',
+        element: <AdminRoute>
+          <ManageBooks></ManageBooks>
         </AdminRoute>
       },
       {

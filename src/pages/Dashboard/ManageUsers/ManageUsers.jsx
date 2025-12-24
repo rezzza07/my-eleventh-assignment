@@ -4,6 +4,7 @@ import { FaBook, FaCalendarAlt, FaDollarSign, FaReceipt, FaUserCircle, FaUserShi
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { MdLocalLibrary } from 'react-icons/md';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const ManageUsers = () => {
 
@@ -97,29 +98,25 @@ const ManageUsers = () => {
                                 <th className="whitespace-nowrap">#</th>
                                 <th className="whitespace-nowrap">
                                     <div className="flex items-center gap-1">
-                                        <FaReceipt /> Name
+                                         Identity
                                     </div>
                                 </th>
                                 <th className="whitespace-nowrap">
                                     <div className="flex items-center gap-1">
-                                        <FaBook /> Email
+                                       Email
                                     </div>
                                 </th>
                                 <th className="whitespace-nowrap">
                                     <div className="flex items-center gap-1">
-                                        <FaDollarSign /> Role
+                                         Role
                                     </div>
                                 </th>
                                 <th className="whitespace-nowrap">
                                     <div className="flex items-center gap-1">
-                                        <FaCalendarAlt /> Admin Actions
+                                        Admin Actions
                                     </div>
                                 </th>
-                                <th className="whitespace-nowrap">
-                                    <div className="flex items-center gap-1">
-                                        <FaCalendarAlt /> Date
-                                    </div>
-                                </th>
+                                
                             </tr>
                         </thead>
 
@@ -197,12 +194,12 @@ const ManageUsers = () => {
 
                                                 </>
                                             )}
-                                            <button
+                                            <Link to="/dashboard/approve-librarians"
                                                 title="Make Librarian"
                                                 className="btn btn-square btn-outline btn-secondary"
                                             >
                                                 <MdLocalLibrary className="text-lg" />
-                                            </button>
+                                            </Link>
 
                                         </div>
                                     </td>

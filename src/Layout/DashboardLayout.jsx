@@ -8,6 +8,8 @@ import { Link, NavLink, Outlet } from 'react-router';
 import useRole from '../hooks/useRole';
 import { RiBookShelfFill } from 'react-icons/ri';
 import { TbPackageExport } from 'react-icons/tb';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { BiSolidBook } from 'react-icons/bi';
 
 const DashboardLayout = () => {
     const { role } = useRole();
@@ -60,7 +62,7 @@ const DashboardLayout = () => {
                                 to="/dashboard/my-wishlist"
                                 className="flex items-center gap-2 text-secondary hover:text-white"
                             >
-                                <PiPackageFill className="text-lg" />
+                                <AiOutlineHeart className="text-lg" />
                                 <span className="is-drawer-close:hidden">My Wishlist</span>
                             </NavLink>
                         </li>
@@ -118,6 +120,16 @@ const DashboardLayout = () => {
                                     >
                                         <FaUserCircle className="text-lg" />
                                         <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/manage-users"
+                                        className="flex items-center gap-2 text-secondary hover:text-white"
+                                    >
+                                        <BiSolidBook className="text-lg" />
+                                        <span className="is-drawer-close:hidden">Manage Books</span>
                                     </NavLink>
                                 </li>
 
