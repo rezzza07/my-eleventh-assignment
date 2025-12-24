@@ -107,7 +107,7 @@ const MyOrders = () => {
                 <th>Order Date</th>
                 <th>Cost</th>
                 <th>Payment</th>
-                <th>Delivery</th>
+                
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -144,7 +144,7 @@ const MyOrders = () => {
                       )}
                     </td>
 
-                    <td>{order.deliveryStatus || 'Pending'}</td>
+                    
 
                     {/* ACTIONS */}
                     <td className="flex justify-center gap-2">

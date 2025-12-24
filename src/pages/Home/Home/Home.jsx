@@ -4,6 +4,9 @@ import Coverage from '../Coverage';
 import WhyChooseBookCourier from '../WhyChooseBookCourier';
 import LatestBooks from './LatestBooks';
 
+import Newsletter from './Newsletter';
+import Stats from '../Stats';
+
 
 const Home = () => {
     return (
@@ -13,6 +16,9 @@ const Home = () => {
             <LatestBooks></LatestBooks>
             <Coverage></Coverage>
             <WhyChooseBookCourier></WhyChooseBookCourier>
+            <Stats></Stats>
+          
+            <Newsletter></Newsletter>
         </div>
     );
 };

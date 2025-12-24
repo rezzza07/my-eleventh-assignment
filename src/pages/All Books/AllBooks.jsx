@@ -6,7 +6,7 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 const AllBooks = () => {
     const axiosSecure = useAxiosSecure();
     const [searchTerm, setSearchTerm] = useState('');
-    const [sortOrder, setSortOrder] = useState(''); // 'asc' or 'desc'
+    const [sortOrder, setSortOrder] = useState(''); 
 
     const { data: books = [] } = useQuery({
         queryKey: ['all-books'],
@@ -18,10 +18,10 @@ const AllBooks = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        // searchTerm is already controlled, so we don't need extra logic
+        
     };
 
-    // Filter and sort books
+   
     const filteredBooks = books
         .filter(book => book.name.toLowerCase().includes(searchTerm.toLowerCase()))
         .sort((a, b) => {
@@ -101,10 +101,10 @@ const AllBooks = () => {
                                 />
                             </figure>
                             <div className="card-body p-6">
-                                <h2 className="card-title text-secondary font-bold text-xl">{book.name}</h2>
-                                <p className="text-secondary mb-2">Author: <span className="font-semibold">{book.author}</span></p>
+                                <h2 className="card-title text-white font-bold text-xl">{book.name}</h2>
+                                <p className="text-secondary">Author: <span className="font-semibold">{book.author}</span></p>
                                 <p className='text-white'>Status: <span className="badge badge-outline badge-secondary">{book.status}</span></p>
-                                <p className="mt-3 font-extrabold text-secondary text-lg">Price: ${book.price}</p>
+                                <p className=" font-extrabold text-secondary text-lg">Price: ${book.price}</p>
                             </div>
                         </div>
                     </Link>

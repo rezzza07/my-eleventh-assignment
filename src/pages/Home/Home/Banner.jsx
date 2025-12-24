@@ -1,31 +1,33 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
+const slides = [
+  {
+    id: 1,
+    heading: "Books Open Minds",
+    subheading: "Reading expands your imagination and knowledge.",
+    description: "Dive into stories, learn new ideas, and experience worlds beyond your own.",
+    bgImage: "https://i.pinimg.com/1200x/96/c3/3e/96c33e9b6cb1ea8a32f062a9b4cb0659.jpg"
+  },
+  {
+    id: 2,
+    heading: "Knowledge is Power",
+    subheading: "Books give you the tools to grow.",
+    description: "Every page you read adds a new perspective and strengthens your mind.",
+    bgImage: "https://i.pinimg.com/1200x/63/3b/a1/633ba1c1e1971176ded82a61737c68a7.jpg"
+  },
+  {
+    id: 3,
+    heading: "A Journey Through Stories",
+    subheading: "Travel without leaving your room.",
+    description: "Books take you to new places, times, and experiences with just your imagination.",
+    bgImage: "https://i.pinimg.com/1200x/b3/09/c0/b309c0c1ffa7be05931297e991b900d2.jpg"
+  }
+];
 
 const Banner = () => {
-  const slides = [
-    {
-      id: 1,
-      title: "The Midnight Library",
-      description: "Unlock premium collections selected specially for readers like you.",
-      image: "https://st4.depositphotos.com/2001403/20595/i/450/depositphotos_205955334-stock-photo-back-school-background-pencils-apple.jpg"
-    },
-    {
-      id: 2,
-      title: "Premium Korean Style Picks",
-      description: "Beautiful design mixed with elegant storytelling.",
-      image: 'https://i0.wp.com/chireviewofbooks.com/wp-content/uploads/2025/04/GreatBigBeautifulLie_1920x675.jpg?fit=1920%2C675&ssl=1'
-    },
-    {
-      id: 3,
-      title: "Find Your Next Favorite Story",
-      description: "Every great journey begins with the right book.",
-      image: "https://thumbs.dreamstime.com/b/open-book-stack-multicolored-hardback-books-cup-coffee-reading-education-literature-panoramic-good-copy-space-153967305.jpg"
-    }
-  ];
-
   return (
     <div className="relative">
       <Carousel
@@ -33,7 +35,7 @@ const Banner = () => {
         infiniteLoop
         showThumbs={false}
         showStatus={false}
-        interval={3000}
+        interval={4000}
         swipeable
         emulateTouch
         renderArrowPrev={(onClickHandler, hasPrev, label) =>
@@ -41,7 +43,7 @@ const Banner = () => {
             <button
               onClick={onClickHandler}
               title={label}
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-secondary text-primary w-12 h-12 rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-secondary/60 transition"
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-secondary/70 transition"
             >
               &#10094;
             </button>
@@ -52,7 +54,7 @@ const Banner = () => {
             <button
               onClick={onClickHandler}
               title={label}
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-secondary text-primary w-12 h-12 rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-secondary/60 transition"
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-secondary/70 transition"
             >
               &#10095;
             </button>
@@ -60,30 +62,37 @@ const Banner = () => {
         }
       >
         {slides.map(slide => (
-          <div key={slide.id} className="relative">
+          <div key={slide.id} className="relative h-[500px] flex items-center px-6 md:px-16">
+
+            {/* Background image */}
             <img
-              src={slide.image}
-              alt={slide.title}
-              className="h-[500px] w-full object-cover brightness-90"
+              src={slide.bgImage}
+              alt={slide.heading}
+              className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#003C37]/80 to-[#003C37]/30 flex items-center px-8 md:px-16">
-              <div className="max-w-lg text-left text-[#D8C8A5] animate-fadeIn">
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">
-                  {slide.title}
-                </h2>
-                <p className="opacity-90 mb-6 text-sm md:text-base drop-shadow">
-                  {slide.description}
-                </p>
-                <a
-                  href="/books"
-                  className="px-6 py-3 bg-secondary text-primary font-semibold rounded-lg shadow-lg hover:opacity-90 transition"
-                >
-                  Browse All Books
-                </a>
-              </div>
+            {/* Primary color shadow overlay */}
+            <div className="absolute inset-0 bg-primary/40"></div>
+
+            {/* Overlay content */}
+            <div className="relative max-w-lg text-left text-white animate-fadeIn">
+              <h2 className="text-3xl md:text-5xl font-extrabold mb-2 bg-clip-text text-transparent text-white drop-shadow-lg">
+                {slide.heading}
+              </h2>
+              <p className="text-lg md:text-xl opacity-90 mb-4 drop-shadow">
+                {slide.subheading}
+              </p>
+              <p className="opacity-90 mb-6 text-sm md:text-base drop-shadow">
+                {slide.description}
+              </p>
+              <Link
+                to="/all-books"
+                className="inline-block px-6 py-3 bg-secondary text-primary font-semibold rounded-lg shadow-lg hover:opacity-90 transition"
+              >
+                Browse Books
+              </Link>
             </div>
+
           </div>
         ))}
       </Carousel>
