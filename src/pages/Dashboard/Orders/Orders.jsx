@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../../components/Loading/Loading";
 
 const Orders = () => {
     const axiosSecure = useAxiosSecure();
@@ -23,7 +24,7 @@ const Orders = () => {
         { onSuccess: () => queryClient.invalidateQueries(["orders"]) }
     );
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <p><Loading></Loading></p>;
 
     return (
         <div className="p-6">

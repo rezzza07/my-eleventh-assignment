@@ -31,6 +31,7 @@ import AddBook from "../pages/Dashboard/AddBook/AddBook";
 import MyBooks from "../pages/Dashboard/MyBooks/MyBooks";
 import MyWishlist from "../pages/Dashboard/MyWishlist/MyWishlist";
 import ManageBooks from "../pages/Dashboard/Manage Books/ManageBooks";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
     </PrivateRoute>,
     children: [
       {
+        index: true,
+        Component: DashboardHome
+      },
+      {
         path: 'my-orders',
         Component: MyOrders
       },
@@ -123,7 +128,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'orders',
-        element:<LibrarianRoutes>
+        element: <LibrarianRoutes>
           <LibrarianBookOrders></LibrarianBookOrders>
         </LibrarianRoutes>
       },

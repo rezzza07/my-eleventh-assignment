@@ -38,7 +38,16 @@ const DashboardLayout = () => {
 
                         {/* List item */}
                         <li>
-                            <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white" data-tip="Homepage">
+                            <Link to="/">
+                                <img
+                                    src="https://i.ibb.co/zTT8ztcb/unnamed-3.png"
+                                    alt="BookCourier Logo"
+                                    className="w-9 h-9 object-contain"
+                                />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/dashboard" className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white" data-tip="Homepage">
                                 {/* Home icon */}
                                 <IoHome className="text-lg" />
 
@@ -125,7 +134,7 @@ const DashboardLayout = () => {
 
                                 <li>
                                     <NavLink
-                                        to="/dashboard/manage-users"
+                                        to="/dashboard/manage-books"
                                         className="flex items-center gap-2 text-secondary hover:text-white"
                                     >
                                         <BiSolidBook className="text-lg" />

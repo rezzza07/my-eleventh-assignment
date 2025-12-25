@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { GiCancel } from 'react-icons/gi';
 import Swal from 'sweetalert2';
 import { PiPackageFill } from 'react-icons/pi';
+import Loading from '../../../components/Loading/Loading';
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -63,7 +64,7 @@ const MyOrders = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center text-primary text-xl font-semibold">
-        Loading orders...
+        <Loading></Loading>
       </div>
     );
   }

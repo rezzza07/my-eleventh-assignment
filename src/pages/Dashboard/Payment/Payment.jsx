@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Loading from '../../../components/Loading/Loading';
 
 const Payment = () => {
 
@@ -31,7 +32,7 @@ const Payment = () => {
 
 
     if (isLoading) {
-        return <div>loading</div>
+        return <div><Loading></Loading> </div>
     }
     return (
         <div>

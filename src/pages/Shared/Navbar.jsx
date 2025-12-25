@@ -44,21 +44,21 @@ const Navbar = () => {
         <Logo />
       </div>
 
-      {/* CENTER */}
+     
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
           {links}
         </ul>
       </div>
 
-      {/* RIGHT */}
+  
       <div className="navbar-end">
 
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="flex items-center gap-2 cursor-pointer">
 
-              {/* Avatar */}
+          
               <div className="avatar">
                 <div className="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   <img
@@ -68,12 +68,12 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Name */}
+       
               <span className="hidden md:block font-medium">
                 {user.displayName || "User"}
               </span>
 
-              {/* Arrow */}
+           
               <svg className="w-4 h-4 opacity-70" fill="none"
                 stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -81,7 +81,7 @@ const Navbar = () => {
               </svg>
             </label>
 
-            {/* Dropdown */}
+  
             <ul tabIndex={0}
               className="mt-3 p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-56">
               <li>

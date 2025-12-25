@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
 
 const LatestBooks = () => {
-
     const axiosSecure = useAxiosSecure();
 
     const { data: books = [] } = useQuery({
@@ -13,26 +12,31 @@ const LatestBooks = () => {
             const res = await axiosSecure.get(`/latest-books`);
             return res.data;
         }
-    })
-    return (
-        <div className="p-10 bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 min-h-screen">
+    });
 
-            {/* Page Title */}
-            <div className="text-center mb-10">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-md">
-                    Latest Books
-                </h2>
-                <span className="w-24 h-1 bg-secondary rounded-full mt-3 block mx-auto"></span>
-            </div>
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 p-10">
+
+            {/* Title */}
+            <h1 className="text-5xl font-extrabold text-center mb-12
+              bg-clip-text text-transparent
+              bg-gradient-to-r from-primary to-secondary
+              drop-shadow-lg">
+                Latest Books
+            </h1>
 
             {/* Books Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {books.map((book) => (
-                    <Link to={`/books/${book._id}`} key={book._id}>
-                        <div className="card bg-base-100 shadow-2xl rounded-3xl overflow-hidden border-2 border-primary hover:scale-105 transform transition-all duration-300">
+                {books.map(book => (
+                    <Link
+                        to={`/books/${book._id}`}
+                        key={book._id}
+                        className="transform hover:scale-105 transition-transform duration-300"
+                    >
+                        <div className="card bg-primary shadow-2xl rounded-3xl border-2 border-secondary overflow-hidden">
 
-                            {/* Book Image */}
-                            <figure className="h-64 overflow-hidden">
+                            {/* Image */}
+                            <figure className="h-64 overflow-hidden rounded-t-3xl">
                                 <img
                                     src={book.image}
                                     alt={book.name}
@@ -40,12 +44,26 @@ const LatestBooks = () => {
                                 />
                             </figure>
 
-                            {/* Book Details */}
-                            <div className="card-body">
-                                <h2 className="card-title text-primary text-xl font-bold truncate">{book.name}</h2>
-                                <p className="text-secondary">Author: {book.author}</p>
-                                <p>Status: <span className="badge badge-secondary">{book.status}</span></p>
-                                <p className="font-bold text-lg text-primary">Price: ${book.price}</p>
+                            {/* Content */}
+                            <div className="card-body p-6">
+                                <h2 className="card-title text-white font-bold text-xl truncate">
+                                    {book.name}
+                                </h2>
+
+                                <p className="text-secondary">
+                                    Author: <span className="font-semibold">{book.author}</span>
+                                </p>
+
+                                <p className="text-white">
+                                    Status:{' '}
+                                    <span className="badge badge-outline badge-secondary">
+                                        {book.status}
+                                    </span>
+                                </p>
+
+                                <p className="font-extrabold text-secondary text-lg">
+                                    Price: ${book.price}
+                                </p>
                             </div>
                         </div>
                     </Link>
@@ -56,26 +74,3 @@ const LatestBooks = () => {
 };
 
 export default LatestBooks;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

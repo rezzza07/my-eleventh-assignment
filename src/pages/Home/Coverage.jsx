@@ -3,6 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Loading from '../../components/Loading/Loading';
 
 const FlyToLocation = ({ coord }) => {
   const map = useMap();
@@ -33,7 +34,7 @@ const Coverage = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center py-20 text-xl text-primary">Loading map...</div>;
+    return <div className="text-center py-20 text-xl text-primary"><Loading></Loading></div>;
   }
 
   return (
