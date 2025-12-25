@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "book-courier-project",
+    "prod": "book-courier-project"
+  },
+  "targets": {},
+  "etags": {}
+}

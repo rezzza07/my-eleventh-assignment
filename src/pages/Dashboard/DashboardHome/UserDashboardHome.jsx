@@ -33,13 +33,14 @@ const UserDashboard = () => {
 
   return (
     <div className="p-8 bg-base-100 min-h-screen">
-      <h1
-        className="text-4xl font-extrabold mb-10
-        bg-clip-text text-transparent
-        bg-gradient-to-r from-primary to-secondary"
-      >
-        User Dashboard
-      </h1>
+      <div className="flex flex-col md:flex-row items-center mb-8 gap-3">
+                            <div className="flex flex-col">
+                                <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-md">
+                                   User Dashboard
+                                </h2>
+                                <span className="w-24 h-1 bg-secondary rounded-full mt-2"></span>
+                            </div>
+                        </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

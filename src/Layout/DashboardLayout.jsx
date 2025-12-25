@@ -13,30 +13,46 @@ import { BiSolidBook } from 'react-icons/bi';
 
 const DashboardLayout = () => {
     const { role } = useRole();
+
+    const getNavLinkClass = ({ isActive }) =>
+        `flex items-center gap-2 p-2 rounded-md transition-colors ${isActive ? 'bg-secondary text-primary' : 'text-secondary hover:text-white'
+        }`;
+
     return (
-        <div className="drawer lg:drawer-open  max-w-7xl mx-auto">
+        <div className="drawer lg:drawer-open max-w-7xl mx-auto">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Navbar */}
                 <nav className="navbar w-full border border-b-2 border-primary ">
                     <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost">
                         {/* Sidebar toggle icon */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            strokeLinejoin="round"
+                            strokeLinecap="round"
+                            strokeWidth="2"
+                            fill="none"
+                            stroke="currentColor"
+                            className="my-1.5 inline-block size-4"
+                        >
+                            <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+                            <path d="M9 4v16"></path>
+                            <path d="M14 10l2 2l-2 2"></path>
+                        </svg>
                     </label>
                     <div className="px-4 text-2xl text-primary font-bold">Book Courier Dashboard</div>
                 </nav>
-                {/* Page content here */}
-                <Outlet></Outlet>
 
+                <Outlet />
             </div>
 
             <div className="drawer-side is-drawer-close:overflow-visible">
                 <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
                 <div className="flex min-h-full flex-col items-start bg-primary is-drawer-close:w-14 is-drawer-open:w-64">
-                    {/* Sidebar content here */}
                     <ul className="menu w-full grow">
 
-                        {/* List item */}
+                        {/* Logo */}
                         <li>
                             <Link to="/">
                                 <img
@@ -46,134 +62,118 @@ const DashboardLayout = () => {
                                 />
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/dashboard" className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white" data-tip="Homepage">
-                                {/* Home icon */}
-                                <IoHome className="text-lg" />
 
-                                <span className="is-drawer-close:hidden ">Homepage</span>
-                            </Link>
+                        {/* Common Links */}
+                        <li>
+                            <NavLink to="/dashboard" end className={getNavLinkClass}>
+                                <IoHome className="text-lg" />
+                                <span className="is-drawer-close:hidden">Homepage</span>
+                            </NavLink>
+
                         </li>
 
-                        {/* Dashboard Links */}
                         <li>
-                            <NavLink
-                                to="/dashboard/my-orders"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
+                            <NavLink to="/dashboard/my-orders" className={getNavLinkClass}>
                                 <PiPackageFill className="text-lg" />
                                 <span className="is-drawer-close:hidden">My Orders</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink
-                                to="/dashboard/my-wishlist"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
+                            <NavLink to="/dashboard/my-wishlist" className={getNavLinkClass}>
                                 <AiOutlineHeart className="text-lg" />
                                 <span className="is-drawer-close:hidden">My Wishlist</span>
                             </NavLink>
                         </li>
 
                         <li>
-                            <NavLink
-                                to="/dashboard/invoices"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
+                            <NavLink to="/dashboard/invoices" className={getNavLinkClass}>
                                 <FaReceipt className="text-lg" />
                                 <span className="is-drawer-close:hidden">Invoices</span>
                             </NavLink>
                         </li>
-                        {/*_______________________________Librarian Route_________________________________ */}
-                        {
-                            role === 'librarian' && <>
+
+                        {/* Librarian Links */}
+                        {role === 'librarian' && (
+                            <>
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/add-book"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/add-book" className={getNavLinkClass}>
                                         <RiBookShelfFill className="text-lg" />
                                         <span className="is-drawer-close:hidden">Add Book</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/my-books"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/my-books" className={getNavLinkClass}>
                                         <IoBookSharp className="text-lg" />
                                         <span className="is-drawer-close:hidden">My Books</span>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/orders"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/orders" className={getNavLinkClass}>
                                         <TbPackageExport className="text-lg" />
                                         <span className="is-drawer-close:hidden">Orders</span>
                                     </NavLink>
                                 </li>
                             </>
-                        }
-                        {/* _____________________________-------- x ----------__________________________ */}
+                        )}
 
-                        {/*_______________________________Admin Route_________________________________ */}
-                        {
-                            role === 'admin' && <>
+                        {/* Admin Links */}
+                        {role === 'admin' && (
+                            <>
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/manage-users"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/manage-users" className={getNavLinkClass}>
                                         <FaUserCircle className="text-lg" />
                                         <span className="is-drawer-close:hidden">Manage Users</span>
                                     </NavLink>
                                 </li>
-
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/manage-books"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/manage-books" className={getNavLinkClass}>
                                         <BiSolidBook className="text-lg" />
                                         <span className="is-drawer-close:hidden">Manage Books</span>
                                     </NavLink>
                                 </li>
-
                                 <li>
-                                    <NavLink
-                                        to="/dashboard/approve-librarians"
-                                        className="flex items-center gap-2 text-secondary hover:text-white"
-                                    >
+                                    <NavLink to="/dashboard/approve-librarians" className={getNavLinkClass}>
                                         <MdOutlineLocalLibrary className="text-lg" />
                                         <span className="is-drawer-close:hidden">Approve Librarians</span>
                                     </NavLink>
                                 </li>
                             </>
-                        }
-                        {/* _____________________________-------- x ----------__________________________ */}
+                        )}
 
-
-                        {/* List item */}
+                        {/* Profile */}
                         <li>
-                            <NavLink
-                                to="/dashboard/my-profile"
-                                className="flex items-center gap-2 text-secondary hover:text-white"
-                            >
+                            <NavLink to="/dashboard/my-profile" className={getNavLinkClass}>
                                 <MdOutlinePersonOutline className="text-lg" />
                                 <span className="is-drawer-close:hidden">My Profile</span>
                             </NavLink>
                         </li>
 
+                        {/* Settings Button */}
                         <li>
-                            <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white" data-tip="Settings">
-                                {/* Settings icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
+                            <button
+                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-secondary hover:text-white p-2 rounded-md"
+                                data-tip="Settings"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    strokeLinejoin="round"
+                                    strokeLinecap="round"
+                                    strokeWidth="2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    className="my-1.5 inline-block size-4"
+                                >
+                                    <path d="M20 7h-9"></path>
+                                    <path d="M14 17H5"></path>
+                                    <circle cx="17" cy="17" r="3"></circle>
+                                    <circle cx="7" cy="7" r="3"></circle>
+                                </svg>
                                 <span className="is-drawer-close:hidden">Settings</span>
                             </button>
                         </li>
+
                     </ul>
                 </div>
             </div>

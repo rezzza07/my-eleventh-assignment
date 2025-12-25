@@ -28,7 +28,7 @@ const ApproveLibrarians = () => {
                 const isApproved = status === 'Approved';
                 Swal.fire({
                     title: status,
-                    text: isApproved ? "Congrats! You're a librarian now." : "The librarian request has been rejected.",
+                    text: isApproved ? "Congrats! Role changed to Librarian" : "The librarian request has been rejected.",
                     icon: isApproved ? "success" : "error",
                     confirmButtonColor: isApproved ? "var(--p)" : "#dc2626"
                 });

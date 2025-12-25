@@ -41,7 +41,15 @@ const AdminDashboardHome = () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Admin Dashboard</h1>
+        <div className="flex flex-col md:flex-row items-center mb-8 gap-3">
+                            <div className="flex flex-col">
+                                <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-md">
+                                    Admin Dashboard
+                                </h2>
+                                <span className="w-24 h-1 bg-secondary rounded-full mt-2"></span>
+                            </div>
+                        </div>
+      
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <StatCard icon={<FaUsers />} title="Users" value={users} bg="bg-primary" />

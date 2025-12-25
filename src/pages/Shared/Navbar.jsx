@@ -9,16 +9,73 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut().catch(console.error);
   };
+const links = (
+  <>
+    <li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary underline decoration-primary decoration-2 text-sm"
+            : "text-sm"
+        }
+      >
+        Home
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/all-books"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary underline decoration-primary decoration-2 text-sm"
+            : "text-sm"
+        }
+      >
+        All Books
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary underline decoration-primary decoration-2 text-sm"
+            : "text-sm"
+        }
+      >
+        Dashboard
+      </NavLink>
+    </li>
+    <li>
+      <NavLink
+        to="/librarian"
+        className={({ isActive }) =>
+          isActive
+            ? "text-primary underline decoration-primary decoration-2 text-sm"
+            : "text-sm"
+        }
+      >
+        Be A Librarian
+      </NavLink>
+    </li>
+    {user && (
+      <li>
+        <NavLink
+          to="/dashboard/my-orders"
+          className={({ isActive }) =>
+            isActive
+              ? "text-primary underline decoration-primary decoration-2 text-sm"
+              : "text-sm"
+          }
+        >
+          My Orders
+        </NavLink>
+      </li>
+    )}
+  </>
+);
 
-  const links = (
-    <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/all-books">All Books</NavLink></li>
-      <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-      <li><NavLink to="/librarian">Be A Librarian</NavLink></li>
-      {user && <li><NavLink to="/dashboard/my-orders">My Orders</NavLink></li>}
-    </>
-  );
 
   return (
     <div className="navbar bg-base-100 shadow-md px-4 sticky top-0 z-50">
